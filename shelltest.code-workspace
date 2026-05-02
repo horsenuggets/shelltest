@@ -1,0 +1,36 @@
+{
+    "extensions": {
+        "recommendations": [
+            "foxundermoon.shell-format",
+            "timonwong.shellcheck"
+        ]
+    },
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "[shellscript]": {
+            "editor.defaultFormatter": "foxundermoon.shell-format",
+            "editor.formatOnSave": true
+        },
+        "editor.rulers": [
+            {
+                "color": "#ffffff10",
+                "column": 90
+            },
+            {
+                "color": "#ffffff10",
+                "column": 120
+            }
+        ],
+        "search.exclude": {
+            "**/Submodules/**": true
+        },
+        "search.useIgnoreFiles": true,
+        "shellcheck.enable": true,
+        "shellcheck.run": "onSave",
+        "shellformat.flag": "-i 4 -ci"
+    }
+}

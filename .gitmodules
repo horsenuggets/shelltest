@@ -1,0 +1,3 @@
+[submodule "Submodules/claude-md"]
+	path = Submodules/claude-md
+	url = git@github.com:horsenuggets/claude-md.git

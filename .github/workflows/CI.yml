@@ -1,0 +1,129 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  branch-name:
+    name: Validate branch name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name format
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          echo "Checking branch name: $BRANCH"
+
+          if [[ ! "$BRANCH" =~ ^(feature|bugfix|hotfix|chore|docs|refactor|test)/ ]]; then
+            echo "::error::Branch name must start with a valid prefix (feature/, bugfix/, hotfix/, chore/, docs/, refactor/, test/)"
+            exit 1
+          fi
+
+          SUFFIX="${BRANCH#*/}"
+          if [[ ! "$SUFFIX" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+            echo "::error::Branch name after prefix must be lowercase kebab-case"
+            exit 1
+          fi
+
+          echo "Branch name is valid."
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build test image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          tags: shelltest:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Run tests in Docker
+        run: docker run --rm shelltest:latest
+
+  test-native:
+    name: Run tests (Native)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Make scripts executable
+        run: |
+          chmod +x ./Tools/*.sh
+          chmod +x ./Tests/*.test.sh
+
+      - name: Run tests
+        run: ./Tools/RunTests.sh Tests
+
+  shellcheck:
+    name: Static analysis (shellcheck)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run shellcheck
+        uses: ludeeus/action-shellcheck@2.0.0
+        with:
+          severity: warning
+          ignore_paths: Submodules
+
+  changelog:
+    name: Check changelog format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate CHANGELOG.md
+        run: |
+          if [[ ! -f CHANGELOG.md ]]; then
+            echo "::error::CHANGELOG.md is missing"
+            exit 1
+          fi
+          if ! head -1 CHANGELOG.md | grep -qx '# Changelog'; then
+            echo "::error::CHANGELOG.md must start with '# Changelog'"
+            exit 1
+          fi
+          if grep -qE '^## 0\.0\.0( |$)' CHANGELOG.md; then
+            echo "::error::CHANGELOG.md must not contain a 0.0.0 entry"
+            exit 1
+          fi
+
+  no-tabs:
+    name: Check for tabs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Reject tab indentation
+        run: |
+          if grep -rPln '^\t' \
+              --include='*.sh' \
+              --include='*.yml' \
+              --include='*.yaml' \
+              --include='*.json' \
+              --include='*.md' \
+              --exclude-dir=Submodules \
+              --exclude-dir=.git \
+              .; then
+            echo "::error::Tab indentation is not allowed"
+            exit 1
+          fi
+          echo "No tab indentation found."

@@ -1,0 +1,16 @@
+# Editor and environment
+.claude
+.DS_Store
+.env
+.local
+.mcp.json
+.vscode
+
+# Generated files
+*.bak
+/Build
+/.worktrees
+
+# Project
+/CONTEXT.md
+/TODO.md
