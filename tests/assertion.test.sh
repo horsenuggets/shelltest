@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
-# AssertionTest.test.sh
+# assertion.test.sh
 #
-# Verifies the behavior of every assertion helper exposed by ShellTest.sh.
+# Verifies the behavior of every assertion helper exposed by shelltest.sh.
 
-source "${SHELLTEST_LIB:-$(dirname "$0")/../Source/ShellTest.sh}"
+source "${SHELLTEST_LIB:-$(dirname "$0")/../src/shelltest.sh}"
 
 describe "Assertions"
 

@@ -16,6 +16,6 @@ WORKDIR /shelltest
 
 COPY . .
 
-RUN chmod +x ./Tools/*.sh ./Tests/*.test.sh
+RUN chmod +x ./tools/*.sh ./tests/*.test.sh
 
-CMD ["./Tools/RunTests.sh", "Tests"]
+CMD ["./tools/test.sh", "tests"]

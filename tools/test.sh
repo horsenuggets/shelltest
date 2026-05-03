@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
-# RunTests.sh
+# test.sh
 #
 # Discovers and runs every `*.test.sh` file in the given tests directory (or
-# `Tests/` by default), aggregates their results, and prints a colored
+# `tests/` by default), aggregates their results, and prints a colored
 # summary. Exits non-zero if any test failed.
 
 set -u
@@ -15,9 +15,9 @@ RESET="\033[0m"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 SHELLTEST_ROOT="$(dirname "$SCRIPT_DIR")"
-export SHELLTEST_LIB="$SHELLTEST_ROOT/Source/ShellTest.sh"
+export SHELLTEST_LIB="$SHELLTEST_ROOT/src/shelltest.sh"
 
-tests_dir="${1:-Tests}"
+tests_dir="${1:-tests}"
 if [[ ! -d "$tests_dir" ]]; then
     echo "Tests directory '$tests_dir' does not exist." >&2
     exit 1

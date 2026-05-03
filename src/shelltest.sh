@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# ShellTest.sh
+# shelltest.sh
 #
 # Shell testing framework inspired by Testable. Source this file from a test
 # script to get the `describe`, `it`, `skip`, and `assert_*` helpers, then call

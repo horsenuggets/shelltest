@@ -7,15 +7,15 @@ A shell testing framework inspired by Testable. Provides a familiar `describe` /
 Add `shelltest` as a submodule:
 
 ```bash
-git submodule add git@github.com:horsenuggets/shelltest.git Submodules/shelltest
+git submodule add git@github.com:horsenuggets/shelltest.git submodules/shelltest
 ```
 
-Write a test file at `Tests/ExampleTest.test.sh`:
+Write a test file at `tests/example.test.sh`:
 
 ```bash
 #!/usr/bin/env bash
 
-source "$(dirname "$0")/../Submodules/shelltest/Source/ShellTest.sh"
+source "$(dirname "$0")/../submodules/shelltest/src/shelltest.sh"
 
 describe "Example Test Suite"
 
@@ -31,7 +31,7 @@ write_results
 Then run all tests with the bundled runner:
 
 ```bash
-./Submodules/shelltest/Tools/RunTests.sh Tests
+./submodules/shelltest/tools/test.sh tests
 ```
 
 ## Assertions

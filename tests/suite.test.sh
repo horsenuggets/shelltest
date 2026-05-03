@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
-# SuiteTest.test.sh
+# suite.test.sh
 #
 # Verifies suite-level behavior: describe, skip, and pass/fail counting.
 
-source "${SHELLTEST_LIB:-$(dirname "$0")/../Source/ShellTest.sh}"
+source "${SHELLTEST_LIB:-$(dirname "$0")/../src/shelltest.sh}"
 
 describe "Suite Behavior"
 

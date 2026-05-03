@@ -2,6 +2,6 @@
 .github
 .vscode
 .worktrees
-Submodules
+submodules
 *.md
 LICENSE
