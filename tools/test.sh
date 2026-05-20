@@ -43,9 +43,9 @@ for file in "${test_files[@]}"; do
     test_name="$(basename "$file" .test.sh)"
     test_dir="$temp_root/$test_name"
     mkdir -p "$test_dir"
-    pushd "$test_dir" >/dev/null
+    pushd "$test_dir" >/dev/null || exit
     bash "$file" || true
-    popd >/dev/null
+    popd >/dev/null || exit
 done
 
 total_pass=0
