@@ -4,6 +4,7 @@
 #
 # Verifies the behavior of every assertion helper exposed by shelltest.sh.
 
+# shellcheck source=/dev/null
 source "${SHELLTEST_LIB:-$(dirname "$0")/../src/shelltest.sh}"
 
 describe "Assertions"
