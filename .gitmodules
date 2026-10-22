@@ -1,3 +1,6 @@
-[submodule "submodules/claude-md"]
-	path = submodules/claude-md
-	url = git@github.com:horsenuggets/claude-md.git
+[submodule "submodules/agents-md-core"]
+	path = submodules/agents-md-core
+	url = git@github.com:horsenuggets/agents-md-core.git
+[submodule "submodules/agents-md-shared"]
+	path = submodules/agents-md-shared
+	url = git@github.com:horsenuggets/agents-md-shared.git
