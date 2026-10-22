@@ -9,8 +9,11 @@
 # Generated files
 *.bak
 /Build
-/.worktrees
 
 # Project
 /CONTEXT.md
 /TODO.md
+
+# Worktrees
+/.worktrees/
+/.wt/
