@@ -1,0 +1,16 @@
+{
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.formatOnSave": true
+    },
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
+    ],
+    "search.exclude": {
+        "**/submodules/**": true
+    },
+    "search.useIgnoreFiles": true,
+    "shellcheck.enable": true,
+    "shellcheck.run": "onSave",
+    "shellformat.flag": "-i 4 -ci"
+}
