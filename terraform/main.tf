@@ -35,12 +35,12 @@ locals {
 
     # Must match the job `name:` fields of every workflow that runs on PRs to main.
     main_checks = [
-        "Check changelog format",
-        "Check for tabs",
-        "Run tests",
-        "Run tests (Native)",
-        "Static analysis (shellcheck)",
-        "Validate branch name"
+        "check-changelog-format",
+        "check-for-tabs",
+        "run-tests",
+        "run-tests-native",
+        "static-analysis",
+        "validate-branch-name"
     ]
 }
 
